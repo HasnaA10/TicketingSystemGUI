@@ -4,6 +4,7 @@ public class Customer implements Runnable {
     private final String eventName;
     private final TicketPool ticketPool;
     private final Configuration configuration;
+    private final Random random = new Random();
 
 
     public Customer(TicketPool ticketPool, String eventName, Configuration configuration) {
@@ -19,6 +20,12 @@ public class Customer implements Runnable {
         if (!purchasedTickets.isEmpty()) {
             FileLogger.saveCustomerDetails(eventName, purchasedTickets);
             System.out.println(Thread.currentThread().getName() + " purchased: " + purchasedTickets);
+        }
+
+        try {
+            Thread.sleep(random.nextInt(100) + 50);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

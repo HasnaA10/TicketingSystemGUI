@@ -20,11 +20,11 @@ public class TicketingSystem {
         System.out.print("Enter the customer retrieval rate: ");
         int customerRetrievalRate = scanner.nextInt();
 
-        System.out.print("Enter the number of customers: ");
-        int customerCount = scanner.nextInt();
-
         System.out.print("Enter the number of vendors: ");
         int vendorCount = scanner.nextInt();
+
+        System.out.print("Enter the number of customers: ");
+        int customerCount = scanner.nextInt();
 
         Configuration configuration = new Configuration(totalTickets, ticketReleaseRate, customerRetrievalRate, maximumTicketCapacity, vendorCount, customerCount);
 
@@ -54,6 +54,7 @@ public class TicketingSystem {
                 Customer customer = new Customer(ticketPool, eventName, configuration );
                 Thread thread = new Thread(customer, "Customer-" + i);
                 customerThreads.add(thread);
+                Thread.sleep(250);
                 thread.start();
             }
 
